@@ -1,0 +1,5 @@
+.Sheet {
+  flex-basis: 500px;
+  border: 1px black solid;
+  background-color: lightgrey;
+}

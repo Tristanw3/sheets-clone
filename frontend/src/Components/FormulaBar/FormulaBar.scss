@@ -1,0 +1,9 @@
+.FormulaBar {
+  flex-basis: 50px;
+  background-color: lightblue;
+  display: flex;
+  justify-content: center;
+  input {
+    width: 400px;
+  }
+}
