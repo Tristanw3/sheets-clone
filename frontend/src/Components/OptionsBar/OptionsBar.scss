@@ -1,0 +1,12 @@
+.OptionsBar {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 40px;
+    background-color: lightgoldenrodyellow;
+    padding-left: 50px;
+
+    i {
+        cursor: pointer;
+    }
+}

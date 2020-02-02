@@ -3,8 +3,9 @@
   height: 20px;
   border: 1px darkgrey solid;
   text-align: right;
+  cursor: context-menu;
 }
 
 .selected {
-  border: 2px orangered solid;
+  border: 1px orangered solid;
 }
