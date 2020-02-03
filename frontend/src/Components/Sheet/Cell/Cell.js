@@ -14,7 +14,8 @@ export default class Cell extends React.Component {
         className={this.props.selected ? "selected Cell" : "Cell"}
         onChange={this.props.updateCurrentCellValue}
         onClick={this.select}
-      ></input>
+        style={this.props.styling}
+      />
     );
   }
 }

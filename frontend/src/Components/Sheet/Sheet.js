@@ -7,19 +7,14 @@ import Cell from "./Cell/Cell";
 export default class Sheet extends React.Component {
   state = {
     size: {
-      rows: 6,
-      columns: 6
+      rows: 7,
+      columns: 7
     },
-    cellsData: [
-      [0, 44, 1, 2, 3],
-      [0, 50, 1, 2, 3],
-      [0, 60, 1, 2, 3],
-      [0, 70, 1, 2, 3],
-      [0, 80, 1, 2, 3]
-    ],
     cellsData2: {
       "0_0": {
-        value: 22
+        value: 22,
+        font: "Impact",
+        fontSize: 18
       },
       "2_2": {
         value: 10
@@ -27,7 +22,7 @@ export default class Sheet extends React.Component {
       "1_3": {
         value: 34
       },
-      "4_5": {
+      "5_5": {
         value: 11
       }
 
@@ -76,60 +71,54 @@ export default class Sheet extends React.Component {
       }
 
       let valCell = 0;
-      if (this.state.cellsData2.hasOwnProperty(rowIndex + "_" + cInd)) {
-        valCell = this.state.cellsData2[rowIndex + "_" + cInd].value
+      let styling = {};
+      let cellLoc = rowIndex + "_" + cInd;
+      if (this.state.cellsData2.hasOwnProperty(cellLoc)) {
+        valCell = this.state.cellsData2[cellLoc].value
+
+        styling.fontFamily = this.state.cellsData2[cellLoc].hasOwnProperty("font") ? this.state.cellsData2[cellLoc].font : null;
+        styling.fontSize = this.state.cellsData2[cellLoc].hasOwnProperty("fontSize") ? this.state.cellsData2[cellLoc].fontSize : null;
+
       }
 
-      y = (<Cell
-        key={rowIndex + "-" + cInd}
-        row={rowIndex}
-        col={cInd}
-        val={valCell}
-        selected={selectedCell}
-        updateCurrentCellValue={this.updateCurrentCellValue}
-        changeSelected={this.changeSelected}
-      />)
+
+
+
+      y = (
+        <Cell
+          key={rowIndex + "-" + cInd}
+          row={rowIndex}
+          col={cInd}
+          val={valCell}
+          styling={styling}
+          selected={selectedCell}
+          updateCurrentCellValue={this.updateCurrentCellValue}
+          changeSelected={this.changeSelected}
+        />
+      )
       rowData.push(y)
     }
     return rowData;
   };
 
 
-  render() {
-    // let selCellVal = getRawFormula(this.state.cellsData, this.state.selectedCell.row, this.state.selectedCell.col)
-    let selCellVal = getRawFormula2(this.state.cellsData2, this.state.selectedCell.row, this.state.selectedCell.col)
-
-    let cellFunc = (row, rowIndex) => {
-      return row.map((cellValue, colIndex) => {
-        let selectedCell = false;
-        if (
-          rowIndex === this.state.selectedCell.row &&
-          colIndex === this.state.selectedCell.col
-        ) {
-          selectedCell = true;
-        }
-        return (
-          <Cell
-            key={rowIndex + "-" + colIndex}
-            row={rowIndex}
-            col={colIndex}
-            val={cellValue}
-            selected={selectedCell}
-            updateCurrentCellValue={this.updateCurrentCellValue}
-            changeSelected={this.changeSelected}
-          />
-        );
-      });
-    };
-
-    let rowsAndCells = this.state.cellsData.map((rowEle, rowIndex) => {
-      return (
-        <div className="rowStyling" key={rowIndex}>
-          {/* {cellFunc(rowEle, rowIndex)} */}
-          {this.cellFunc(rowIndex)}
+  cellfunc2 = () => {
+    let rArray = [];
+    let z;
+    for (let rInd = 0; rInd < this.state.size.columns; rInd++) {
+      z = (
+        <div className="rowStyling" key={rInd}>
+          {this.cellFunc(rInd)}
         </div>
-      );
-    });
+      )
+      rArray.push(z)
+    }
+    return rArray;
+  }
+
+
+  render() {
+    let selCellVal = getRawFormula2(this.state.cellsData2, this.state.selectedCell.row, this.state.selectedCell.col)
 
     return (
       <div className="Sheet">
@@ -137,7 +126,7 @@ export default class Sheet extends React.Component {
           currentCellValue={selCellVal}
           updateCurrentCellValue={this.updateCurrentCellValue}
         />
-        {rowsAndCells}
+        {this.cellfunc2()}
       </div>
     );
   }
