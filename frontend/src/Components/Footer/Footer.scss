@@ -1,4 +1,6 @@
 .Footer {
-    background-color: black;
-    height: 50px;
+  display: flex;
+  flex-grow: 1;
+  background-color: lightcoral;
+  min-height: 10px;
 }

@@ -1,12 +1,30 @@
 .OptionsBar {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 40px;
-    background-color: lightgoldenrodyellow;
-    padding-left: 50px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: lightgoldenrodyellow;
+  padding-left: 50px;
 
-    i {
-        cursor: pointer;
-    }
+  .font {
+    margin: 10px;
+  }
+
+  .selector {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px black solid;
+    width: 150px;
+    border-radius: 3px;
+  }
+  select {
+    margin-right: 3px;
+    width: 150px;
+    text-align: end;
+  }
+
+  i {
+    padding: 5px 2.5px;
+    cursor: pointer;
+  }
 }
