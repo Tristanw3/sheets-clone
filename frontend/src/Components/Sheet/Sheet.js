@@ -7,28 +7,19 @@ import Cell from "./Cell/Cell";
 export default class Sheet extends React.Component {
   state = {
     size: {
-      rows: 20,
+      rows: 40,
       columns: 20
     },
     cellsData: {
-      "0_0": {
-        value: 22,
-        font: "Impact",
-        fontSize: 24
-      },
       "0_1": {
-        value: "Car",
-        font: "Impact",
+        value: "Vehicle",
+        font: "Lucida Sans Unicode",
         fontSize: 20
       },
-      "2_2": {
-        value: 10
-      },
-      "1_3": {
-        value: 34
-      },
-      "5_5": {
-        value: 11
+      "0_2": {
+        value: "Price",
+        font: "Lucida Sans Unicode",
+        fontSize: 20
       }
     },
     selectedCell: {
@@ -42,6 +33,8 @@ export default class Sheet extends React.Component {
       ...this.state,
       cellsData: changeValue(
         e.target.value,
+        this.props.newFont,
+        this.props.newFontSize,
         this.state.cellsData,
         this.state.selectedCell.row,
         this.state.selectedCell.col
@@ -173,12 +166,16 @@ function getRawFormula(cells, row, col) {
   return 0;
 }
 
-function changeValue(val, cells, row, col) {
+function changeValue(val, newFont, newFontSize, cells, row, col) {
   let cellLoc = row + "_" + col;
   if (cells.hasOwnProperty(cellLoc)) {
     cells[cellLoc].value = val;
+    cells[cellLoc].font = newFont;
+    cells[cellLoc].fontSize = newFontSize;
   } else {
     cells[cellLoc] = { value: val };
+    cells[cellLoc] = { font: newFont };
+    cells[cellLoc] = { fontSize: newFontSize };
   }
 
   return cells;

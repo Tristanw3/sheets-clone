@@ -1,0 +1,19 @@
+{
+  "name": "sheets-clone",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Tristanw3/sheets-clone.git",
+  "author": "<tristanw3@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^3.0.8",
+    "concurrently": "^5.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.11",
+    "validator": "^12.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
