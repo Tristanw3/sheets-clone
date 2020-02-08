@@ -1,5 +1,6 @@
 import React from "react";
 import "./Sheet.scss";
+import axios from "axios";
 
 import FormulaBar from "../FormulaBar/FormulaBar";
 import Cell from "./Cell/Cell";
@@ -26,6 +27,40 @@ export default class Sheet extends React.Component {
       row: 0,
       col: 0
     }
+  };
+
+  getCells = () => {
+    // let auth = JSON.parse(sessionStorage.getItem("auth"));
+    // console.log("auth");
+    // console.log(auth);
+    // if (!auth) return;
+
+    axios
+      .get(`/cells`, {
+        // headers: { Authorization: `Bearer ${auth.token}` }
+        body: { sheetId: "5e3e40413c74671ad9d8bf1b" }
+      })
+      .then(response => {
+        console.log(response.data);
+        let cellsData = response.data.sheetCells;
+        console.log(cellsData);
+        let cellObj = {};
+        cellsData.forEach(ele => {
+          cellObj[ele.ref] = {
+            value: ele.value,
+            font: ele.font,
+            fontSize: ele.fontSize
+          };
+        });
+
+        this.setState({
+          ...this.state,
+          cellsData: cellObj
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   updateCurrentCellValue = e => {

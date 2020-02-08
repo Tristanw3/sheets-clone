@@ -2,11 +2,18 @@
   "name": "sheets-clone",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "client-install": "cd frontend && yarn",
+    "start": "node ./src/app.js",
+    "server": "nodemon ./src/app.js",
+    "web": "yarn --cwd ./frontend/ start",
+    "dev": "concurrently \"yarn run server\" \"yarn run web\""
+  },
   "repository": "https://github.com/Tristanw3/sheets-clone.git",
   "author": "<tristanw3@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^3.0.8",
+    "bcryptjs": "^2.4.3",
     "concurrently": "^5.1.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",

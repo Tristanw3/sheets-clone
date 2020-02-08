@@ -1,43 +1,23 @@
 import React from "react";
 import "./App.scss";
 
-import Header from "./Components/Header/Header";
-import OptionsBar from "./Components/OptionsBar/OptionsBar";
-import Sheet from "./Components/Sheet/Sheet";
-import Footer from "./Components/Footer/Footer";
+import { Router, Link } from "@reach/router";
+
+// Pages
+import Spreadsheet from "./Spreadsheet/Spreadsheet";
+import SheetsPage from "./SheetsPage/SheetsPage";
+import Login from "./Login/Login";
+import Signup from "./SignUp/SignUp";
 
 export default class App extends React.Component {
-  state = {
-    currentFont: "Lucida Sans Unicode",
-    currentFontSize: 11
-  };
-  changeFont = fontTop => {
-    this.setState({
-      ...this.state,
-      currentFont: fontTop
-    });
-  };
-  changeFontSize = fontSizeTop => {
-    this.setState({
-      ...this.state,
-      currentFontSize: fontSizeTop
-    });
-  };
-
   render() {
     return (
-      <div className="App">
-        <Header />
-        <OptionsBar
-          changeFontFunction={this.changeFont}
-          changeFontSizeFunction={this.changeFontSize}
-        />
-        <Sheet
-          newFont={this.state.currentFont}
-          newFontSize={this.state.currentFontSize}
-        />
-        <Footer />
-      </div>
+      <Router>
+        <Spreadsheet path="/" />
+        <SheetsPage path="/Sheets" />
+        <Login path="/login" />
+        <Signup path="/signup" />
+      </Router>
     );
   }
 }
