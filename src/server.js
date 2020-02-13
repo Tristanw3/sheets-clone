@@ -13,7 +13,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Convert incoming json to javascript object
-app.use(express.static(path.join(__dirname, "frontend", "build")));
+app.use(express.static(path.join(__dirname, "client", "build")));
 app.use(express.json());
 app.use(userRouter);
 app.use(sheetRouter);
