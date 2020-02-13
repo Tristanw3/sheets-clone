@@ -11,13 +11,15 @@ import Signup from "./SignUp/SignUp";
 
 export default class App extends React.Component {
   state = {
-    user: "id"
+    userId: "",
+    name: ""
   };
   componentDidMount() {
     let auth = JSON.parse(sessionStorage.getItem("auth"));
     if (!auth) return;
     this.setState({
-      user_id: auth.user._id
+      user_id: auth.user._id,
+      name: auth.user.name
     });
   }
 
