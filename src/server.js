@@ -10,7 +10,7 @@ const sheetRouter = require("./routes/sheetRoutes");
 const cellRouter = require("./routes/cellRoutes");
 
 const app = express();
-const port = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8080;
 
 // Convert incoming json to javascript object
 app.use(express.static(path.join(__dirname, "frontend", "build")));
@@ -20,9 +20,9 @@ app.use(sheetRouter);
 app.use(cellRouter);
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
 });
 
-app.listen(port, () => {
-  console.log("Server is up on " + port);
+app.listen(PORT, () => {
+  console.log("Server is up on " + PORT);
 });

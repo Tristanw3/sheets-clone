@@ -1,0 +1,11 @@
+.Cell {
+  width: 100px;
+  min-height: 20px;
+  border: 1px darkgrey solid;
+  text-align: right;
+  cursor: context-menu;
+}
+
+.selected {
+  border: 1px orangered solid;
+}

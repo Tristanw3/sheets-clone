@@ -8,7 +8,7 @@
     "server": "nodemon ./src/app.js",
     "web": "yarn --cwd ./frontend/ start",
     "dev": "concurrently \"yarn run server\" \"yarn run web\"",
-    "heroku-postbuild": "cd frontend && yarn install --only=dev && yarn install && yarn run build"
+    "heroku-postbuild": "cd client && yarn install && yarn run build"
   },
   "repository": "https://github.com/Tristanw3/sheets-clone.git",
   "author": "<tristanw3@outlook.com>",
