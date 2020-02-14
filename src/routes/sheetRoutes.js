@@ -24,12 +24,13 @@ router.post("/sheets/create", async (req, res) => {
   }
 });
 
-router.get("/sheets", async (req, res) => {
+router.post("/sheets", async (req, res) => {
   try {
     const sheets = await Sheet.find({ user: req.body.userId });
     // single.populate("user").execPopulate(function(err) {
     //   console.log(single.user.email);
     // });
+    // console.log(sheets)
 
     res.send({ sheets });
   } catch (e) {

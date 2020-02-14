@@ -27,7 +27,7 @@ export default class Spreadsheet extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header />
+        <Header title={this.props.title} />
         <OptionsBar
           changeFontFunction={this.changeFont}
           changeFontSizeFunction={this.changeFontSize}
@@ -35,6 +35,7 @@ export default class Spreadsheet extends React.Component {
         <Sheet
           newFont={this.state.currentFont}
           newFontSize={this.state.currentFontSize}
+          sheetId={this.props.title}
         />
         <Footer />
       </div>

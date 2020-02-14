@@ -20,7 +20,7 @@ router.post("/cells/create", async (req, res) => {
     res.status(201);
     res.send("Cell added");
   } catch (e) {
-    console.log("Failed to add cell");
+    console.log(e);
     res.status(400);
     res.send(e);
   }

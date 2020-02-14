@@ -39,6 +39,9 @@ export default class OptionsBar extends React.Component {
           </select>
         </div>
         <div className="selector">
+          <p>
+            Font Size
+          </p>
           <i onClick={() => this.fontSizeChange(30)} className="material-icons">
             add_circle_outline
           </i>

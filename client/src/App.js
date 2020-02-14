@@ -11,23 +11,33 @@ import Signup from "./SignUp/SignUp";
 
 export default class App extends React.Component {
   state = {
-    userId: "",
+    userId: "5e3dfdf5534e340e2bb993c8",
+    currentSheetId: "",
+    // userId: "",
     name: ""
   };
   componentDidMount() {
     let auth = JSON.parse(sessionStorage.getItem("auth"));
     if (!auth) return;
     this.setState({
-      user_id: auth.user._id,
+      ...this.state,
+      userId: auth.user._id,
       name: auth.user.name
+    });
+  }
+
+  updateCurrentSheet = (id) => {
+    this.setState({
+      ...this.state,
+      currentSheetId: id
     });
   }
 
   render() {
     return (
       <Router>
-        <Spreadsheet path="/" />
-        <SheetsPage path="/sheets" user_id={this.state.user_id} />
+        <Spreadsheet path="/" title={this.state.currentSheetId} />
+        <SheetsPage path="/sheets" userId={this.state.userId} currentSheetFunction={this.updateCurrentSheet} />
         <Login path="/login" />
         <Signup path="/signup" />
       </Router>

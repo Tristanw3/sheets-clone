@@ -38,7 +38,7 @@ export default class Sheet extends React.Component {
     axios
       .get(`/cells`, {
         // headers: { Authorization: `Bearer ${auth.token}` }
-        body: { sheetId: "5e3e40413c74671ad9d8bf1b" }
+        body: { sheetId: this.props.sheetId }
       })
       .then(response => {
         console.log(response.data);
@@ -75,6 +75,20 @@ export default class Sheet extends React.Component {
         this.state.selectedCell.col
       )
     });
+    window.cells = this.state.cellsData
+
+    axios
+      .post(`/cells/create`, {
+        // headers: { Authorization: `Bearer ${auth.token}` }
+
+        ref: this.state.selectedCell.row + "_" + this.state.selectedCell.col,
+        sheetId: this.props.sheetId,
+        value: e.target.value,
+        font: this.props.newFont,
+        fontSize: this.props.newFontSize
+
+      })
+
   };
 
   changeSelected = (rowLoc, colLoc) => {
@@ -103,7 +117,7 @@ export default class Sheet extends React.Component {
       let styling = {};
       let cellLoc = rowIndex + "_" + cInd;
       if (this.state.cellsData.hasOwnProperty(cellLoc)) {
-        valCell = this.state.cellsData[cellLoc].value;
+        valCell = getValue(this.state.cellsData[cellLoc].value)
 
         styling.fontFamily = this.state.cellsData[cellLoc].hasOwnProperty(
           "font"
@@ -216,14 +230,31 @@ function changeValue(val, newFont, newFontSize, cells, row, col) {
   return cells;
 }
 
+function loc(row, col) {
+  return parseInt(window.cells[row + "_" + col].value)
+}
+
 // formula function
 function getValue(formula) {
-  if (formula.charAt(0) === "=") {
-    let equation;
-    let rawEquation = formula.split("");
-    rawEquation.shift();
-    rawEquation.forEach((ele, ind) => {});
-  } else {
-    return "error";
+  if (formula !== undefined) {
+    if (formula.length !== 1) {
+      if (formula.charAt(0) === "=") {
+        try {
+          return eval(formula.substring(1))
+        } catch (error) {
+          return "error";
+        }
+
+      } else {
+        return formula
+      }
+
+    } else {
+      return formula
+    }
+
   }
+
+
 }
+
